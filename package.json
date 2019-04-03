@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "description": "Minha primeira api",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "consign": "^0.1.6",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "jano-mysql": "^0.0.7",
+    "shazam-middleware": "^0.1.0"
+  }
+}
