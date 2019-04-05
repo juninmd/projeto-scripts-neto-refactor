@@ -1,20 +1,19 @@
-const config = require('../config');
-const mysql = require('jano-mysql')(config.mysql);
+const mysql = require('./baseDao');
 
 module.exports = {
-  getAll: () => {
-    return mysql.executeObject("INSERT INTO cliente SET ?", { NOME: nome });
+  getById: async (id) => {
+    return (await mysql.executeString(`SELECT * FROM autores WHERE aut_codigo = ${id}`)).content;
   },
-  getById: (id) => {
-    return mysql.readProcedure("CLIENTES", [1]);
+  getAll: async () => {
+    return (await mysql.executeString(`SELECT * FROM autores`)).content;
   },
-  post: (model) => {
-    return mysql.readProcedure("CLIENTES", [1]);
+  insert: async (body) => {
+    return (await mysql.executeObject(`INSERT INTO autores SET ?`, body)).content;
   },
-  put: (model, id) => {
-    return mysql.readProcedure("CLIENTES", [1]);
+  update: async (body) => {
+    return (await mysql.executeObject(`UPDATE autores SET ? WHERE aut_codigo = ${body.aut_codigo}`, body)).content;
   },
-  deleteById: (id) => {
-    return mysql.readProcedure("CLIENTES", [1]);
-  },
-}
+  delete: async (id) => {
+    return (await mysql.executeString(`DELETE FROM autores WHERE aut_codigo = ${id}`)).content;
+  }
+};
