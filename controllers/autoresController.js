@@ -12,17 +12,17 @@ module.exports = (app) => {
   });
 
   app.post('/autores/', async (req, res) => {
-    const response = await autoresDao.post(req.body);
+    const response = await autoresDao.insert(req.body);
     return res.send(response).status(201);
   });
 
   app.put('/autores/:id', async (req, res) => {
-    const response = await autoresDao.put(req.body, req.params.id);
+    const response = await autoresDao.update({ ...req.body, aut_codigo: req.params.id });
     return res.send(response).status(200);
   });
 
   app.delete('/autores/:id', async (req, res) => {
-    await autoresDao.deleteById(req.params.id);
+    await autoresDao.delete(req.params.id);
     return res.send({}).status(204);
   });
 };
