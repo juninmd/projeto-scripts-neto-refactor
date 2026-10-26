@@ -12,17 +12,17 @@ module.exports = (app) => {
   });
 
   app.post('/editoras/', async (req, res) => {
-    const response = await editorasDao.post(req.body);
+    const response = await editorasDao.insert(req.body);
     return res.send(response).status(201);
   });
 
   app.put('/editoras/:id', async (req, res) => {
-    const response = await editorasDao.put(req.body, req.params.id);
+    const response = await editorasDao.update({ ...req.body, edt_codigo: req.params.id });
     return res.send(response).status(200);
   });
 
   app.delete('/editoras/:id', async (req, res) => {
-    await editorasDao.deleteById(req.params.id);
+    await editorasDao.delete(req.params.id);
     return res.send({}).status(204);
   });
 };

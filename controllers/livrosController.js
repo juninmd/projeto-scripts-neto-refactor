@@ -12,17 +12,17 @@ module.exports = (app) => {
   });
 
   app.post('/livros/', async (req, res) => {
-    const response = await livrosDao.post(req.body);
+    const response = await livrosDao.insert(req.body);
     return res.send(response).status(201);
   });
 
   app.put('/livros/:id', async (req, res) => {
-    const response = await livrosDao.put(req.body, req.params.id);
+    const response = await livrosDao.update({ ...req.body, aut_codigo: req.params.id });
     return res.send(response).status(200);
   });
 
   app.delete('/livros/:id', async (req, res) => {
-    await livrosDao.deleteById(req.params.id);
+    await livrosDao.delete(req.params.id);
     return res.send({}).status(204);
   });
 };
